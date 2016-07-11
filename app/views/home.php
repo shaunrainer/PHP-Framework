@@ -44,7 +44,7 @@
 
             <div class="jumbotron">
                 <h1>Welcome to Shaun's Framework</h1>
-                <p>Please visit stage 2 via the facebook link above</p>
+                <p>Please login to facebook via the link in the navigation.</p>
             </div>
 
         </div>
