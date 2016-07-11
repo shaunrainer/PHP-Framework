@@ -6,7 +6,12 @@
 
     session_start();
     define('ROOT', dirname(dirname(__FILE__)));
-    define('APP_URL', 'http://' . $_SERVER['HTTP_HOST'] .'/storm');
+
+    if($_SERVER['HTTP_HOST'] == 'localhost') {
+        define('APP_URL', 'http://' . $_SERVER['HTTP_HOST'] .'/storm');
+    } else {
+        define('APP_URL', 'http://' . $_SERVER['HTTP_HOST']);
+    }
 
     /*
      * Require essentials

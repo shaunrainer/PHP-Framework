@@ -80,7 +80,6 @@ class FacebookController extends Controller {
         $logoutUrl = $helper->getLogoutUrl($_SESSION['facebook_access_token'], APP_URL .'/facebook');
 
         // Unset sessions
-        unset($_SESSION['facebook_name']);
         unset($_SESSION['facebook_access_token']);
 
         header('location: ' . $logoutUrl);
