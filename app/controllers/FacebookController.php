@@ -64,8 +64,7 @@ class FacebookController extends Controller {
     {
 
         $helper = $this->facebook->getRedirectLoginHelper();
-        $permissions = ['user_photos'];
-        $loginUrl = $helper->getLoginUrl(APP_URL .'/facebook/callback', $permissions);
+        $loginUrl = $helper->getLoginUrl(APP_URL .'/facebook/callback');
 
         header('location: ' . $loginUrl);
 

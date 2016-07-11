@@ -33,7 +33,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?= APP_URL ?>">Home</a></li>
-                        <li><a href="facebook">Facebook</a></li>
+                        <li><a href="<?= APP_URL ?>/facebook">Facebook</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
 
