@@ -23,36 +23,49 @@ class FacebookController extends Controller {
     {
         
         if(isset($_SESSION['facebook_access_token'])){
-
-            $accessToken = $_SESSION['facebook_access_token'];
-
-            try {
-                $response = $this->facebook->get('/me', $accessToken);
-            } catch(Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                exit;
-            } catch(Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                exit;
-            }
-
-            $user = $response->getGraphUser();
-
-            $_SESSION['facebook_name'] = $user->getName();
-
-            $this->render('facebookView');
+            header('location: ' . APP_URL . '/facebook/profile');
         }else{
-            $this->render('facebook');
+            $this->render('facebook/login');
         }
         
+    }
+
+    public function profile()
+    {
+
+        // If access token session is not set redirect back to login
+        if(!isset($_SESSION['facebook_access_token'])) {
+            header('location: ' . APP_URL . '/facebook');
+        }
+
+        $accessToken = $_SESSION['facebook_access_token'];
+
+        // Attempt to get user info
+        try {
+            $response = $this->facebook->get('/me', $accessToken);
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        $user = $response->getGraphUser();
+
+        // Set user data for the view and render view
+        $data['facebookName'] = $user->getName();
+
+        $this->render('facebook/profile', $data);
+
     }
 
     public function login()
     {
 
         $helper = $this->facebook->getRedirectLoginHelper();
-        $permissions = ['email', 'user_likes'];
-        $loginUrl = $helper->getLoginUrl(APP_URL .'facebook/callback', $permissions);
+        $permissions = ['user_photos'];
+        $loginUrl = $helper->getLoginUrl(APP_URL .'/facebook/callback', $permissions);
 
         header('location: ' . $loginUrl);
 
@@ -64,14 +77,14 @@ class FacebookController extends Controller {
     {
 
         $helper = $this->facebook->getRedirectLoginHelper();
-        $logoutUrl = $helper->getLogoutUrl($_SESSION['facebook_access_token'], APP_URL .'facebook');
+        $logoutUrl = $helper->getLogoutUrl($_SESSION['facebook_access_token'], APP_URL .'/facebook');
 
         // Unset sessions
         unset($_SESSION['facebook_name']);
         unset($_SESSION['facebook_access_token']);
 
         header('location: ' . $logoutUrl);
-        exit;
+
     }
 
     public function callback()
@@ -81,20 +94,33 @@ class FacebookController extends Controller {
 
         try {
             $accessToken = $helper->getAccessToken();
-        } catch (Exception $e){
-            echo 'Error: ' . $e->getMessage();
+        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+            // When Graph returns an error
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+            // When validation fails or other local issues
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-        if (isset($accessToken)) {
-            // Store access token in session.
-            $_SESSION['facebook_access_token'] = (string)$accessToken;
-            header('Location: '. APP_URL .'facebook');
+
+        if (!isset($accessToken)) {
+            if ($helper->getError()) {
+                header('HTTP/1.0 401 Unauthorized');
+                echo "Error: " . $helper->getError() . "\n";
+                echo "Error Code: " . $helper->getErrorCode() . "\n";
+                echo "Error Reason: " . $helper->getErrorReason() . "\n";
+                echo "Error Description: " . $helper->getErrorDescription() . "\n";
+            } else {
+                header('HTTP/1.0 400 Bad Request');
+                echo 'Bad request';
+            }
             exit;
-        } elseif($helper->getError()) {
-            var_dump($helper->getError());
-            var_dump($helper->getErrorCode());
-            var_dump($helper->getErrorDescription());
         }
+
+        $_SESSION['facebook_access_token'] = (string)$accessToken;
+
+        header('Location: '. APP_URL .'/facebook/profile');
 
     }
 

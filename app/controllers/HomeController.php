@@ -11,8 +11,9 @@ class HomeController extends Controller {
 
     function index()
     {
+        $data['pageTitle'] = 'Storm MVC';
 
-        $this->render('home');
+        $this->render('home', $data);
 
     }
 

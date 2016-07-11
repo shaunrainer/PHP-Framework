@@ -8,10 +8,11 @@ class Controller {
         $this->view = new View;
         
     }
-    public function render($name)
+
+    public function render($name, $data = [])
     {
         
-        $this->view->render($name);
+        $this->view->render($name, $data);
         exit;
         
     }

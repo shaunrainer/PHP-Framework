@@ -6,8 +6,8 @@
 
     session_start();
     define('ROOT', dirname(dirname(__FILE__)));
-    define('APP_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/storm/');
-    
+    define('APP_URL', 'http://' . $_SERVER['HTTP_HOST'] .'/storm');
+
     /*
      * Require essentials
     */

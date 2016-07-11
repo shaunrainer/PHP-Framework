@@ -2,7 +2,7 @@
 
 class View {
 
-    public function render($name)
+    public function render($name, $data = [])
     {
 
         if( ! file_exists('../app/views/' . $name . '.php')){

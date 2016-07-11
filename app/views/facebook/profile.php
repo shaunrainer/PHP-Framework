@@ -9,9 +9,9 @@
     <title>Storm MVC</title>
 
     <!-- Bootstrap CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= APP_URL ?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="inc/css/style.css" rel="stylesheet">
+    <link href="<?= APP_URL ?>/inc/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -27,12 +27,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Storm MVC</a>
+            <a class="navbar-brand" href="<?= APP_URL ?>">Storm MVC</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/storm">Home</a></li>
+                <li><a href="<?= APP_URL ?>">Home</a></li>
                 <li class="active"><a href="facebook">Facebook</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -45,9 +45,9 @@
     <div class="panel panel-default">
 
         <div class="panel-body">
-            
-            <h1>Welcome <?= $_SESSION['facebook_name'] ?></h1>
-            <a class="btn btn-default pull-center" href="facebook/logout">logout</a>
+
+            <h1>Welcome <?= $data['facebookName'] ?></h1>
+            <a class="btn btn-default pull-center" href="<?= APP_URL ?>/facebook/logout">logout</a>
 
 
         </div>
@@ -60,7 +60,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- Bootstra JS -->
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?= APP_URL ?>/assets/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

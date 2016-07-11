@@ -9,9 +9,9 @@
     <title>Storm MVC</title>
 
     <!-- Bootstrap CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= APP_URL ?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="inc/css/style.css" rel="stylesheet">
+    <link href="<?= APP_URL ?>/inc/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -27,12 +27,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Storm MVC</a>
+            <a class="navbar-brand" href="<?= APP_URL ?>">Storm MVC</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/storm">Home</a></li>
+                <li><a href="<?= APP_URL ?>">Home</a></li>
                 <li class="active"><a href="facebook">Facebook</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -47,7 +47,7 @@
         <div class="panel-body">
 
             <p>You are not logged in, please login by clicking the button below</p>
-            <a class="btn btn-default pull-center" href="facebook/login">Login to Facebook</a>
+            <a class="btn btn-default pull-center" href="<?= APP_URL ?>/facebook/login">Login to Facebook</a>
 
         </div>
 
@@ -58,8 +58,8 @@
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-<!-- Bootstra JS -->
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="<?= APP_URL ?>/assets/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
