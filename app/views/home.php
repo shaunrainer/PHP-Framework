@@ -43,7 +43,7 @@
         <div class="container">
 
             <div class="jumbotron">
-                <h1>Welcome to Shaun's Framework</h1>
+                <h1>Storm MVC framework</h1>
                 <p>Please login to facebook via the link in the navigation.</p>
             </div>
 
